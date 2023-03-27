@@ -20,7 +20,7 @@ export class AuthService {
     }
     return null;
   }
-  
+
   async login(user: User) {
     const payload = this.createJwtPayload(user);
     return {
@@ -30,5 +30,13 @@ export class AuthService {
 
   createJwtPayload(user: User) {
     return { email: user.email, sub: user._id };
+  }
+
+  async register(userData: any) {
+    const user = await this.userService.createUser(userData);
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }

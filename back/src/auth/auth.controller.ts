@@ -19,4 +19,9 @@ export class AuthController {
   async protectedRoute() {
     // Your protected route logic here
   }
+
+  @Post('register')
+  async register(@Request() req) {
+    return this.authService.register(req.body);
+  }
 }
