@@ -26,7 +26,8 @@ const RegistrationPage = () => {
           password: password,
         };
         const response = await axios.post(serverurl + 'auth/register', data);
-        const token = response.data;
+        const token = response.data.access_token;
+
         //save the token in the local storage. 
         localStorage.setItem('token', token);
         navigate('/dashboard');

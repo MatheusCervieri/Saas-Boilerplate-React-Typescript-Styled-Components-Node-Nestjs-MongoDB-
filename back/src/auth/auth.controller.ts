@@ -1,4 +1,4 @@
-import { Controller, Request, Post, UseGuards } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
@@ -16,6 +16,13 @@ export class AuthController {
   @Post('protected-route')
   async protectedRoute() {
     // Your protected route logic here
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('user-information')
+  async getUserInformation(@Request() req) {
+    const userId = req.user._id;
+    console.log(req.user);
   }
 
   @Post('register')

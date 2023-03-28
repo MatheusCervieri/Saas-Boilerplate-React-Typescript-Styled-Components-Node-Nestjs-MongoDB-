@@ -41,7 +41,8 @@ const Dashboard: React.FC = () => {
 
   const fetchEmail = async () => {
     try {
-      const response = await axios.get(serverurl + 'users' + '/email', {
+      console.log(token);
+      const response = await axios.get(serverurl + 'auth' + '/user-information', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +51,7 @@ const Dashboard: React.FC = () => {
       setEmail(response.data.email);
     } catch (error) {
       console.error(error);
-      setRedirect(true);
+      //setRedirect(true);
     }
   };
 
