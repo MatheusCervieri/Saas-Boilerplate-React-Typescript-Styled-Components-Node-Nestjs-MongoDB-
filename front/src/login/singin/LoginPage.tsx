@@ -18,15 +18,15 @@ const LoginPage = () => {
         email: email,
         password: password,
       };
-      const response = await axios.post(serverurl + 'users/login', data);
+      const response = await axios.post(serverurl + 'auth/login', data);
       const token = response.data;
       // save the token in the local storage
       localStorage.setItem('token', token);
       navigate('/dashboard');
       // handle successful login and token
-    } catch (err) {
+    } catch (err : any) {
       console.error(err);
-      setError('Invalid email or password');
+      setError(err.response.data.message);
     }
   };
 

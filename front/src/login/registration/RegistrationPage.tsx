@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { serverurl } from '../../confs/serverurl';
 import { useNavigate } from 'react-router-dom';
+import {UserDTO} from '../dto/login.dto';
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState('');
@@ -20,19 +21,19 @@ const RegistrationPage = () => {
     }
 
     try {
-        const data = {
+        const data : UserDTO = {
           email: email,
           password: password,
         };
-        const response = await axios.post(serverurl + 'users/add', data);
+        const response = await axios.post(serverurl + 'auth/register', data);
         const token = response.data;
         //save the token in the local storage. 
         localStorage.setItem('token', token);
         navigate('/dashboard');
         // handle successful registration and token
-      } catch (err) {
+      } catch (err : any) {
         console.error(err);
-        setError('Server error');
+        setError(err.response.data.message);
       }
   };
 
