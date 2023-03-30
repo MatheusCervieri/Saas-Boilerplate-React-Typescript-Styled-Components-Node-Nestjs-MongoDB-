@@ -1,6 +1,7 @@
 import { Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
+import { UserInformationDTO } from 'src/dto/userInformation.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -21,8 +22,11 @@ export class AuthController {
   @UseGuards(AuthGuard('jwt'))
   @Get('user-information')
   async getUserInformation(@Request() req) {
-    const userId = req.user._id;
-    console.log(req.user);
+    const data : UserInformationDTO = {
+      email : req.user.email,
+    }
+    return data; 
+
   }
 
   @Post('register')

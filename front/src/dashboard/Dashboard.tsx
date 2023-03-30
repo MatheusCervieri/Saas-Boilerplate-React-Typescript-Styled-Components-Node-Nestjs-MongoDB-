@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      console.log(response.data);
       setEmail(response.data.email);
     } catch (error) {
       console.error(error);
