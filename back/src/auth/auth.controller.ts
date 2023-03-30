@@ -27,6 +27,7 @@ export class AuthController {
 
   @Post('register')
   async register(@Request() req) {
+    console.log('SECRET_JWT:', process.env.SECRET_JWT); 
     return this.authService.register(req.body);
   }
 }

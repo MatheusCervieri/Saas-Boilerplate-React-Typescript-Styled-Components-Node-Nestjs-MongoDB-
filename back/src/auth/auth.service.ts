@@ -56,7 +56,7 @@ export class AuthService {
     const user = await this.userService.createUser(userData);
     const payload = { email: user.email, sub: user._id };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, { secret: process.env.SECRET_JWT }),
     };
   }
 }
