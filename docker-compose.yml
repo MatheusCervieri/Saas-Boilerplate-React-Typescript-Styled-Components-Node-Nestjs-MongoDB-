@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   front:
     build: ./front
@@ -7,29 +6,28 @@ services:
       - 3000:3000
     volumes:
       - ./front:/app
-      - /app/node_modules
+    env_file:
+      - .env
     depends_on:
       - back
-
   back:
     build: ./back
     ports:
       - 3001:3001
-    environment:
-      DATABASE_URL: mongodb://mongo:27017/mydb
+    env_file:
+      - .env
     volumes:
       - ./back:/app
-      - /app/node_modules
     depends_on:
       - mongo
-
   mongo:
     image: mongo
     ports:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
+    env_file:
+      - .env
 
 volumes:
   mongodb_data:
-    

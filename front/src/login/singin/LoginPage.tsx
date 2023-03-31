@@ -19,7 +19,7 @@ const LoginPage = () => {
         password: password,
       };
       const response = await axios.post(serverurl + 'auth/login', data);
-      const token = response.data;
+      const token = response.data.access_token;
       // save the token in the local storage
       localStorage.setItem('token', token);
       navigate('/dashboard');
